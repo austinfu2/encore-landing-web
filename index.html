@@ -37,12 +37,127 @@ a:hover { text-decoration: underline; }
 /* ── HERO ──────────────────────────────────────────── */
 
 .hero {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px 40px 60px;
+  align-items: center;
+  padding: 120px 40px 80px;
   position: relative;
+}
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.hero-phone {
+  flex-shrink: 0;
+  animation: fadeUp 1.2s ease-out 0.2s both;
+}
+
+.phone-frame {
+  width: 260px;
+  height: 520px;
+  background: var(--ink);
+  border-radius: 36px;
+  padding: 12px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.phone-frame::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 22px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  z-index: 10;
+}
+
+.phone-frame.phone-sm {
+  width: 200px;
+  height: 400px;
+  border-radius: 28px;
+  padding: 10px;
+}
+
+.phone-frame.phone-sm::before {
+  width: 60px;
+  height: 18px;
+  top: 10px;
+  border-radius: 10px;
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: var(--paper);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.phone-frame.phone-sm .phone-screen {
+  border-radius: 18px;
+}
+
+.mock-header {
+  padding: 40px 16px 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.phone-frame.phone-sm .mock-header {
+  padding: 30px 12px 8px;
+}
+
+.mock-card {
+  margin: 8px 12px;
+  background: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+}
+
+.mock-card-img {
+  height: 60px;
+  position: relative;
+}
+
+.mock-card-img::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(transparent, rgba(255,253,248,0.8));
+}
+
+.mock-card-body {
+  padding: 8px 10px;
+}
+
+.how-phones {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 80px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.how-phones.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-nav {
@@ -89,8 +204,9 @@ a:hover { text-decoration: underline; }
 }
 
 .hero-content {
-  max-width: 700px;
+  max-width: 520px;
   animation: fadeUp 1s ease-out;
+  flex-shrink: 0;
 }
 
 .hero-tag {
@@ -167,18 +283,6 @@ a:hover { text-decoration: underline; }
 
 .btn-secondary:hover {
   border-color: var(--ink3);
-}
-
-.hero-scroll {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  color: var(--ink3);
-  letter-spacing: 1px;
-  animation: bounce 2s infinite;
 }
 
 /* ── FEATURES ──────────────────────────────────────── */
@@ -541,24 +645,24 @@ a:hover { text-decoration: underline; }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(8px); }
-}
-
-/* ── MOBILE ────────────────────────────────────────── */
-
 @media (max-width: 768px) {
   .hero { padding: 100px 24px 60px; }
+  .hero-inner { flex-direction: column; gap: 40px; }
+  .hero-phone { display: none; }
   .hero-nav { padding: 16px 24px; }
   .features { padding: 80px 24px; }
   .stats-ribbon { gap: 40px; padding: 40px 24px; }
   .how { padding: 80px 24px; }
+  .how-phones { gap: 16px; }
+  .phone-frame.phone-sm { width: 160px; height: 320px; }
   .preview { padding: 80px 24px; }
   .cta { padding: 80px 24px; }
   .footer { padding: 24px; flex-direction: column; text-align: center; }
   .stat-num { font-size: 32px; }
-  .hero-scroll { display: none; }
+}
+
+@media (max-width: 480px) {
+  .how-phones .phone-frame.phone-sm:nth-child(3) { display: none; }
 }
 </style>
 </head>
@@ -572,19 +676,65 @@ a:hover { text-decoration: underline; }
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-content">
-    <div class="hero-tag">YOUR CONCERT DIARY</div>
-    <h1 class="hero-title">Remember<br>every <em>show.</em></h1>
-    <p class="hero-sub">Rate the concerts you go to. See what your friends thought. Build your live music history. Never forget a show again.</p>
-    <div class="hero-buttons">
-      <button class="btn-primary">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M11.182 2.27a2.86 2.86 0 0 1 2.548 2.548c.053.576.053 1.228.053 1.957v2.45c0 .729 0 1.381-.053 1.957A2.86 2.86 0 0 1 11.182 13.73c-.576.053-1.228.053-1.957.053H6.775c-.729 0-1.381 0-1.957-.053A2.86 2.86 0 0 1 2.27 11.182C2.217 10.606 2.217 9.954 2.217 9.225V6.775c0-.729 0-1.381.053-1.957A2.86 2.86 0 0 1 4.818 2.27C5.394 2.217 6.046 2.217 6.775 2.217h2.45c.729 0 1.381 0 1.957.053zM6.5 5.5v5l4-2.5-4-2.5z"/></svg>
-        DOWNLOAD FOR IOS
-      </button>
-      <button class="btn-secondary" onclick="document.querySelector('.how').scrollIntoView({behavior:'smooth'})">SEE HOW IT WORKS</button>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">YOUR CONCERT DIARY</div>
+      <h1 class="hero-title">Remember<br>every <em>show.</em></h1>
+      <p class="hero-sub">Rate the concerts you go to. See what your friends thought. Build your live music history. Never forget a show again.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M11.182 2.27a2.86 2.86 0 0 1 2.548 2.548c.053.576.053 1.228.053 1.957v2.45c0 .729 0 1.381-.053 1.957A2.86 2.86 0 0 1 11.182 13.73c-.576.053-1.228.053-1.957.053H6.775c-.729 0-1.381 0-1.957-.053A2.86 2.86 0 0 1 2.27 11.182C2.217 10.606 2.217 9.954 2.217 9.225V6.775c0-.729 0-1.381.053-1.957A2.86 2.86 0 0 1 4.818 2.27C5.394 2.217 6.046 2.217 6.775 2.217h2.45c.729 0 1.381 0 1.957.053zM6.5 5.5v5l4-2.5-4-2.5z"/></svg>
+          DOWNLOAD FOR IOS
+        </button>
+        <button class="btn-secondary" onclick="document.querySelector('.how').scrollIntoView({behavior:'smooth'})">SEE HOW IT WORKS</button>
+      </div>
+    </div>
+    <div class="hero-phone">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="mock-header">
+            <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;">Your Feed</span>
+          </div>
+          <div class="mock-card">
+            <div class="mock-card-img" style="background:linear-gradient(135deg,#2a1a3a,#0F3460);"></div>
+            <div class="mock-card-body">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                <div>
+                  <div style="font-size:11px;font-weight:600;">Radiohead</div>
+                  <div style="font-size:8px;color:#888;font-family:'DM Mono',monospace;">Roundhouse · London</div>
+                </div>
+                <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--accent);">4.5</div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-card">
+            <div class="mock-card-img" style="background:linear-gradient(135deg,#1A3A1A,#2D5A2D);"></div>
+            <div class="mock-card-body">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                <div>
+                  <div style="font-size:11px;font-weight:600;">Arctic Monkeys</div>
+                  <div style="font-size:8px;color:#888;font-family:'DM Mono',monospace;">O2 Arena · London</div>
+                </div>
+                <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--accent);">4.8</div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-card">
+            <div class="mock-card-img" style="background:linear-gradient(135deg,#2D1B00,#8B4513);"></div>
+            <div class="mock-card-body">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                <div>
+                  <div style="font-size:11px;font-weight:600;">Tame Impala</div>
+                  <div style="font-size:8px;color:#888;font-family:'DM Mono',monospace;">Primavera Sound · Barcelona</div>
+                </div>
+                <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--accent);">5.0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="hero-scroll">SCROLL</div>
 </section>
 
 <!-- FEATURES -->
@@ -660,9 +810,52 @@ a:hover { text-decoration: underline; }
       </div>
     </div>
   </div>
+  <div class="how-phones">
+    <div class="phone-frame phone-sm">
+      <div class="phone-screen">
+        <div class="mock-header"><span style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;">Search</span></div>
+        <div style="padding:8px 12px;">
+          <div style="background:rgba(0,0,0,0.05);border-radius:6px;padding:8px 10px;font-size:9px;color:#aaa;font-family:'DM Mono',monospace;">Search artists...</div>
+          <div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap;">
+            <span style="font-size:7px;padding:3px 6px;border-radius:10px;background:rgba(212,118,60,0.1);color:var(--accent);font-family:'DM Mono',monospace;">rock</span>
+            <span style="font-size:7px;padding:3px 6px;border-radius:10px;background:rgba(0,0,0,0.05);color:#888;font-family:'DM Mono',monospace;">indie</span>
+            <span style="font-size:7px;padding:3px 6px;border-radius:10px;background:rgba(0,0,0,0.05);color:#888;font-family:'DM Mono',monospace;">electronic</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-frame phone-sm">
+      <div class="phone-screen">
+        <div class="mock-header"><span style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;">Rate</span></div>
+        <div style="padding:10px 12px;text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--accent);line-height:1;">4.5</div>
+          <div style="font-size:8px;color:#888;font-family:'DM Mono',monospace;margin-top:4px;">YOUR RATING</div>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;justify-content:space-between;font-size:8px;font-family:'DM Mono',monospace;"><span style="color:#888;">Performance</span><span style="color:var(--accent);">5.0</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:8px;font-family:'DM Mono',monospace;"><span style="color:#888;">Sound</span><span style="color:var(--accent);">4.0</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:8px;font-family:'DM Mono',monospace;"><span style="color:#888;">Venue</span><span style="color:var(--accent);">4.5</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-frame phone-sm">
+      <div class="phone-screen">
+        <div class="mock-header"><span style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;">Share</span></div>
+        <div style="padding:8px 12px;">
+          <div style="background:#1a1a1a;border-radius:8px;overflow:hidden;">
+            <div style="height:80px;background:linear-gradient(135deg,#2a1a3a,#0F3460);"></div>
+            <div style="padding:8px;margin-top:-20px;position:relative;">
+              <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--accent);line-height:1;">4.5</div>
+              <div style="font-size:9px;font-weight:600;color:#fff;">RAYE</div>
+              <div style="font-size:6px;color:#666;font-family:'DM Mono',monospace;">Montreux · Jul 2024</div>
+              <div style="font-size:7px;color:#444;font-family:'Playfair Display',serif;font-style:italic;margin-top:4px;">encore</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-
-<!-- SHARE CARD PREVIEW -->
 <section class="preview">
   <div class="preview-tag">SHARE YOUR EXPERIENCE</div>
   <h2 class="preview-title">Beautiful concert cards</h2>
@@ -712,7 +905,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15 });
 
-document.querySelectorAll('.feature, .how-step').forEach(el => observer.observe(el));
+document.querySelectorAll('.feature, .how-step, .how-phones').forEach(el => observer.observe(el));
 
 // Stat counter animation
 const statObserver = new IntersectionObserver((entries) => {
