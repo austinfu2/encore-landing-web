@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encore — Your Concert Diary</title>
+<meta name="description" content="Rate the shows you go to. See what your friends thought. Never forget a concert.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F5F0E8;
+  --ink: #2C2C2A;
+  --ink2: #5A5A56;
+  --ink3: #8A8A84;
+  --accent: #D4763C;
+  --rule: #DDD8CC;
+  --white: #FFFDF8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+.mono { font-family: 'DM Mono', monospace; }
+.serif { font-family: 'Playfair Display', serif; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── HERO ──────────────────────────────────────────── */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 40px 60px;
+  position: relative;
+}
+
+.hero-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(245, 240, 232, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.hero-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--accent);
+  letter-spacing: -0.5px;
+}
+
+.hero-cta-nav {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  padding: 10px 20px;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.hero-cta-nav:hover {
+  transform: translateY(-1px);
+  background: #1a1a18;
+}
+
+.hero-content {
+  max-width: 700px;
+  animation: fadeUp 1s ease-out;
+}
+
+.hero-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -2px;
+  margin-bottom: 28px;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.8;
+  max-width: 440px;
+  margin-bottom: 40px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  padding: 14px 28px;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: #1a1a18;
+}
+
+.btn-secondary {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--rule);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--ink3);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink3);
+  letter-spacing: 1px;
+  animation: bounce 2s infinite;
+}
+
+/* ── FEATURES ──────────────────────────────────────── */
+
+.features {
+  padding: 120px 40px;
+  border-top: 1px solid var(--rule);
+}
+
+.features-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 60px;
+}
+
+.feature {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.feature.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--accent);
+  opacity: 1;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  background: rgba(212, 118, 60, 0.1);
+}
+
+.feature-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.3;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.feature-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.3px;
+}
+
+.feature-desc {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.8;
+}
+
+/* ── STATS RIBBON ──────────────────────────────────── */
+
+.stats-ribbon {
+  padding: 60px 40px;
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: rgba(245, 240, 232, 0.4);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+/* ── HOW IT WORKS ──────────────────────────────────── */
+
+.how {
+  padding: 120px 40px;
+  border-top: 1px solid var(--rule);
+}
+
+.how-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.how-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.how-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.how-steps {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.how-step {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.how-step.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.step-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--accent);
+  opacity: 0.12;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.step-icon::after {
+  content: attr(data-num);
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  position: absolute;
+}
+
+.step-text h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.step-text p {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.7;
+}
+
+/* ── SHARE CARD PREVIEW ────────────────────────────── */
+
+.preview {
+  padding: 120px 40px;
+  background: var(--ink);
+  text-align: center;
+}
+
+.preview-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: rgba(245, 240, 232, 0.3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.preview-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  color: var(--paper);
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.preview-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: rgba(245, 240, 232, 0.4);
+  margin-bottom: 48px;
+}
+
+.preview-card {
+  width: 280px;
+  margin: 0 auto;
+  background: #1a1a1a;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+}
+
+.preview-card-img {
+  height: 300px;
+  background: linear-gradient(135deg, #2a1a3a, #0F3460);
+  position: relative;
+}
+
+.preview-card-img::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(transparent, #1a1a1a);
+}
+
+.preview-card-info {
+  padding: 0 20px 20px;
+  position: relative;
+  z-index: 1;
+  margin-top: -60px;
+  text-align: left;
+}
+
+.preview-score {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.preview-artist {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 4px;
+}
+
+.preview-venue {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: #888;
+  margin-top: 6px;
+  letter-spacing: 0.3px;
+}
+
+.preview-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  font-style: italic;
+  color: #555;
+  margin-top: 12px;
+}
+
+/* ── CTA ───────────────────────────────────────────── */
+
+.cta {
+  padding: 120px 40px;
+  text-align: center;
+  border-top: 1px solid var(--rule);
+}
+
+.cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+
+.cta-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.cta-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--ink2);
+  margin-bottom: 40px;
+}
+
+/* ── FOOTER ────────────────────────────────────────── */
+
+.footer {
+  padding: 40px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--accent);
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--ink3);
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.footer-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink3);
+}
+
+/* ── ANIMATIONS ────────────────────────────────────── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ── MOBILE ────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .hero { padding: 100px 24px 60px; }
+  .hero-nav { padding: 16px 24px; }
+  .features { padding: 80px 24px; }
+  .stats-ribbon { gap: 40px; padding: 40px 24px; }
+  .how { padding: 80px 24px; }
+  .preview { padding: 80px 24px; }
+  .cta { padding: 80px 24px; }
+  .footer { padding: 24px; flex-direction: column; text-align: center; }
+  .stat-num { font-size: 32px; }
+  .hero-scroll { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="hero-nav">
+  <div class="hero-logo">encore</div>
+  <button class="hero-cta-nav" onclick="document.querySelector('.cta').scrollIntoView({behavior:'smooth'})">DOWNLOAD</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">YOUR CONCERT DIARY</div>
+    <h1 class="hero-title">Remember<br>every <em>show.</em></h1>
+    <p class="hero-sub">Rate the concerts you go to. See what your friends thought. Build your live music history. Never forget a show again.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M11.182 2.27a2.86 2.86 0 0 1 2.548 2.548c.053.576.053 1.228.053 1.957v2.45c0 .729 0 1.381-.053 1.957A2.86 2.86 0 0 1 11.182 13.73c-.576.053-1.228.053-1.957.053H6.775c-.729 0-1.381 0-1.957-.053A2.86 2.86 0 0 1 2.27 11.182C2.217 10.606 2.217 9.954 2.217 9.225V6.775c0-.729 0-1.381.053-1.957A2.86 2.86 0 0 1 4.818 2.27C5.394 2.217 6.046 2.217 6.775 2.217h2.45c.729 0 1.381 0 1.957.053zM6.5 5.5v5l4-2.5-4-2.5z"/></svg>
+        DOWNLOAD FOR IOS
+      </button>
+      <button class="btn-secondary" onclick="document.querySelector('.how').scrollIntoView({behavior:'smooth'})">SEE HOW IT WORKS</button>
+    </div>
+  </div>
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+      <div class="feature-num">01</div>
+      <h3 class="feature-title">Rate every show</h3>
+      <p class="feature-desc">Log concerts you've attended. Rate the performance, sound, crowd, and venue. Build your personal concert history going back years.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="feature-num">02</div>
+      <h3 class="feature-title">Follow friends</h3>
+      <p class="feature-desc">See what your friends rated. Discover concerts through people with taste you trust. Your feed is your music community.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      <div class="feature-num">03</div>
+      <h3 class="feature-title">Discover what's next</h3>
+      <p class="feature-desc">Browse upcoming concerts near you. Filter by genre, city, and date. Never miss a show from an artist you love.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-ribbon">
+  <div class="stat">
+    <div class="stat-num">100K+</div>
+    <div class="stat-label">ARTISTS</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">300K+</div>
+    <div class="stat-label">CONCERTS</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">20K+</div>
+    <div class="stat-label">VENUES</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">350K+</div>
+    <div class="stat-label">ALBUMS</div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-header">
+    <div class="how-tag">HOW IT WORKS</div>
+    <h2 class="how-title">Three taps to remember</h2>
+  </div>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="step-icon" data-num="1"></div>
+      <div class="step-text">
+        <h3>Find the concert</h3>
+        <p>Search by artist, venue, or date. We have over 300,000 concerts in our database, from arena tours to intimate club shows.</p>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="step-icon" data-num="2"></div>
+      <div class="step-text">
+        <h3>Rate the show</h3>
+        <p>Score the performance, sound quality, crowd energy, and venue. Add a written review. Rate each supporting act individually.</p>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="step-icon" data-num="3"></div>
+      <div class="step-text">
+        <h3>Share and discover</h3>
+        <p>Post your rating to your feed. Share beautiful concert cards to Instagram. See what friends thought about the same show.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHARE CARD PREVIEW -->
+<section class="preview">
+  <div class="preview-tag">SHARE YOUR EXPERIENCE</div>
+  <h2 class="preview-title">Beautiful concert cards</h2>
+  <div style="margin-bottom:48px"></div>
+  <div class="preview-card">
+    <div class="preview-card-img"></div>
+    <div class="preview-card-info">
+      <div class="preview-score">4.5</div>
+      <div class="preview-artist">RADIOHEAD</div>
+      <div class="preview-venue">Roundhouse, London<br>18 July 2024</div>
+      <div class="preview-brand">encore</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2 class="cta-title">Start logging<br>your <em>concerts.</em></h2>
+  <p class="cta-sub">Free on iOS. No account needed to browse.</p>
+  <div class="hero-buttons" style="justify-content:center;">
+    <button class="btn-primary">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M11.182 2.27a2.86 2.86 0 0 1 2.548 2.548c.053.576.053 1.228.053 1.957v2.45c0 .729 0 1.381-.053 1.957A2.86 2.86 0 0 1 11.182 13.73c-.576.053-1.228.053-1.957.053H6.775c-.729 0-1.381 0-1.957-.053A2.86 2.86 0 0 1 2.27 11.182C2.217 10.606 2.217 9.954 2.217 9.225V6.775c0-.729 0-1.381.053-1.957A2.86 2.86 0 0 1 4.818 2.27C5.394 2.217 6.046 2.217 6.775 2.217h2.45c.729 0 1.381 0 1.957.053zM6.5 5.5v5l4-2.5-4-2.5z"/></svg>
+      DOWNLOAD FOR IOS
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">encore</div>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="/cdn-cgi/l/email-protection#2e464b4242416e4b404d415c4b4f5e5e004d4143">Contact</a>
+    <a href="#">Instagram</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Encore. Made for concertgoers.</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Scroll-triggered animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 120);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.feature, .how-step').forEach(el => observer.observe(el));
+
+// Stat counter animation
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.stat-num').forEach(el => {
+        const text = el.textContent;
+        const match = text.match(/(\d+)/);
+        if (!match) return;
+        const target = parseInt(match[1]);
+        const suffix = text.replace(match[1], '');
+        let current = 0;
+        const step = Math.ceil(target / 40);
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          el.textContent = current.toLocaleString() + suffix;
+          if (current >= target) clearInterval(timer);
+        }, 30);
+      });
+      statObserver.un
