@@ -4,120 +4,408 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Encore — Your Concert Diary</title>
-<meta name="description" content="Rate the shows you go to. See what your friends thought. Never forget a concert.">
+<meta name="description" content="Rate the shows you go to, keep a diary of every gig, and see what your friends thought. 3.2 million concerts. Free on iOS.">
+<link rel="canonical" href="https://encoreapp.to/">
+<meta name="theme-color" content="#F5F0E8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#211F1C" media="(prefers-color-scheme: dark)">
+<!-- Social unfurl -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Encore">
+<meta property="og:title" content="Encore — Your Concert Diary">
+<meta property="og:description" content="Rate every show, keep a diary of every gig, and see what your friends thought. 3.2 million concerts.">
+<meta property="og:url" content="https://encoreapp.to/">
+<meta property="og:image" content="https://encoreapp.to/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Encore — Your Concert Diary">
+<meta name="twitter:description" content="Rate every show, keep a diary of every gig, and see what your friends thought.">
+<meta name="twitter:image" content="https://encoreapp.to/og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23D4763C'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-style='italic' font-weight='700' fill='%23F5F0E8' text-anchor='middle'%3Ee%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--paper:#F5F0E8;--ink:#2C2C2A;--ink2:#5A5A56;--ink3:#8A8A84;--accent:#D4763C;--rule:#DDD8CC;--white:#FFFDF8}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(245,240,232,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--rule)}.nav-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;font-style:italic;color:var(--accent)}.nav-btn{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.5px;padding:10px 20px;background:var(--ink);color:var(--paper);border:none;border-radius:6px;cursor:pointer;transition:transform .2s}.nav-btn:hover{transform:translateY(-1px)}
-.hero{padding:120px 40px 80px;display:flex;align-items:center;justify-content:center;gap:60px;max-width:1100px;margin:0 auto}.hero-text{max-width:520px;animation:fadeUp 1s ease-out}.hero-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}.hero-title{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,88px);font-weight:700;line-height:1;letter-spacing:-2px;margin-bottom:28px}.hero-title em{font-style:italic;color:var(--accent)}.hero-sub{font-family:'DM Mono',monospace;font-size:14px;color:var(--ink2);line-height:1.8;max-width:440px;margin-bottom:40px}.hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
-.btn-primary{font-family:'DM Mono',monospace;font-size:13px;padding:14px 28px;background:var(--ink);color:var(--paper);border:none;border-radius:8px;cursor:pointer;transition:transform .2s;display:inline-flex;align-items:center;gap:8px}.btn-primary:hover{transform:translateY(-2px)}.btn-ghost{font-family:'DM Mono',monospace;font-size:13px;padding:14px 28px;background:transparent;color:var(--ink);border:1.5px solid var(--rule);border-radius:8px;cursor:pointer}.btn-ghost:hover{border-color:var(--ink3)}
-.phone{flex-shrink:0;animation:fadeUp 1.2s ease-out .2s both}.phone-frame{width:260px;height:520px;background:var(--ink);border-radius:36px;padding:12px;box-shadow:0 30px 60px rgba(0,0,0,.15);position:relative}.phone-frame::before{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);width:80px;height:22px;background:#1a1a1a;border-radius:12px;z-index:10}.phone-screen{width:100%;height:100%;background:var(--paper);border-radius:24px;overflow:hidden}.phone-hdr{padding:40px 16px 10px;border-bottom:1px solid var(--rule);font-family:'Playfair Display',serif;font-size:16px;font-weight:700}.phone-card{margin:8px 12px;background:var(--white);border-radius:10px;overflow:hidden;border:1px solid var(--rule)}.phone-card-gradient{height:55px}.phone-card-body{padding:8px 10px;display:flex;justify-content:space-between;align-items:center}.phone-card-info{font-size:11px;font-weight:600}.phone-card-sub{font-size:8px;color:var(--ink3);font-family:'DM Mono',monospace;margin-top:2px}.phone-card-score{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--accent)}
-.stats{padding:60px 40px;background:var(--ink);color:var(--paper);display:flex;justify-content:center;gap:80px;flex-wrap:wrap}.stat-num{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--accent);text-align:center}.stat-label{font-family:'DM Mono',monospace;font-size:10px;color:rgba(245,240,232,.4);letter-spacing:1px;text-transform:uppercase;margin-top:8px;text-align:center}
-.features{padding:100px 40px;border-top:1px solid var(--rule)}.features-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:60px}.feat{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s}.feat.visible{opacity:1;transform:translateY(0)}.feat-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:rgba(212,118,60,.1)}.feat-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:var(--accent);opacity:.3;margin-bottom:12px}.feat-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:10px}.feat-desc{font-family:'DM Mono',monospace;font-size:12px;color:var(--ink2);line-height:1.8}
-.how{padding:100px 40px;border-top:1px solid var(--rule)}.how-header{text-align:center;margin-bottom:60px}.how-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.how-title{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,48px);font-weight:700;letter-spacing:-1px}
-.how-phones{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;max-width:900px;margin:0 auto}.how-col{display:flex;flex-direction:column;align-items:center;gap:20px;opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s}.how-col.visible{opacity:1;transform:translateY(0)}.how-pf{width:220px;height:420px;background:var(--ink);border-radius:30px;padding:10px;position:relative;box-shadow:0 20px 40px rgba(0,0,0,.12)}.how-pf::before{content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);width:64px;height:18px;background:#1a1a1a;border-radius:10px;z-index:10}.how-ps{width:100%;height:100%;background:var(--paper);border-radius:20px;overflow:hidden}.how-ph{padding:32px 14px 8px;border-bottom:1px solid var(--rule);font-family:'Playfair Display',serif;font-size:14px;font-weight:700}.how-label{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600}.how-sublabel{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3);margin-top:4px;text-align:center;max-width:200px}
-.share{padding:100px 40px;background:var(--ink);text-align:center}.share-tag{font-family:'DM Mono',monospace;font-size:10px;color:rgba(245,240,232,.3);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}.share-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);font-weight:700;color:var(--paper);margin-bottom:48px}.share-card{width:280px;margin:0 auto;background:#1a1a1a;border-radius:16px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.4)}.share-card-img{height:300px;background:linear-gradient(135deg,#2a1a3a,#0F3460);position:relative}.share-card-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(transparent,#1a1a1a)}.share-card-info{padding:0 20px 20px;position:relative;z-index:1;margin-top:-60px;text-align:left}.share-score{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--accent);line-height:1}.share-artist{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-top:4px}.share-venue{font-family:'DM Mono',monospace;font-size:10px;color:#888;margin-top:6px}.share-brand{font-family:'Playfair Display',serif;font-size:12px;font-style:italic;color:#555;margin-top:12px}
-.cta{padding:100px 40px;text-align:center;border-top:1px solid var(--rule)}.cta-title{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,64px);font-weight:700;letter-spacing:-1.5px;margin-bottom:16px;line-height:1.1}.cta-title em{font-style:italic;color:var(--accent)}.cta-sub{font-family:'DM Mono',monospace;font-size:13px;color:var(--ink2);margin-bottom:40px}
-.footer{padding:40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}.footer-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;font-style:italic;color:var(--accent)}.footer-links{display:flex;gap:24px}.footer-links a{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3);text-decoration:none}.footer-links a:hover{color:var(--ink)}.footer-copy{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:768px){.hero{flex-direction:column;padding:100px 24px 60px;gap:40px}.phone{display:none}.nav{padding:16px 24px}.features{padding:80px 24px}.stats{gap:40px;padding:40px 24px}.stat-num{font-size:32px}.how{padding:80px 24px}.how-phones{gap:20px}.how-pf{width:160px;height:320px}.share{padding:80px 24px}.cta{padding:80px 24px}.footer{padding:24px;flex-direction:column;text-align:center}}
-@media(max-width:480px){.how-col:nth-child(3){display:none}}
+:root{
+  --paper:#F5F0E8; --paper2:#EDE8DF; --ink:#2C2C2A; --ink2:#5A5A56; --ink3:#8A8A84;
+  --accent:#C4622D; --accent2:#E0885A; --rule:#DDD8CC; --white:#FFFDF8;
+  --card:#1c1a18; --card-ink:#F5F0E8; --card-ink3:#8f887d;
+  --serif:'Playfair Display',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
+  --mono:'DM Mono',ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#211F1C; --paper2:#2A2825; --ink:#F2EDE3; --ink2:#C7C0B4; --ink3:#8F887D;
+  --accent:#E0885A; --accent2:#EBA983; --rule:#3A3630; --white:#2A2825;
+}}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 40px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* NAV */
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--rule)}
+.nav-logo{font-family:var(--serif);font-size:24px;font-weight:700;font-style:italic;color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:22px}
+.nav-link{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.nav-link:hover{color:var(--ink)}
+.btn{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:11px 20px;border-radius:8px;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:8px;transition:transform .18s ease,box-shadow .18s ease;white-space:nowrap}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px color-mix(in srgb,var(--ink) 22%,transparent)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--rule)}
+.btn-ghost:hover{border-color:var(--ink3)}
+.btn-accent{background:var(--accent);color:var(--white)}
+.btn-accent:hover{transform:translateY(-2px);box-shadow:0 10px 24px color-mix(in srgb,var(--accent) 34%,transparent)}
+
+/* HERO */
+.hero{padding:150px 40px 90px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:56px;max-width:1120px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.2em;text-transform:uppercase;margin-bottom:22px}
+.hero h1{font-family:var(--serif);font-size:clamp(46px,7.2vw,86px);font-weight:700;line-height:.98;letter-spacing:-.02em;text-wrap:balance;margin-bottom:24px}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:clamp(16px,2vw,19px);color:var(--ink2);max-width:460px;margin-bottom:34px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.hero-note{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:18px;letter-spacing:.02em}
+
+/* PHONE */
+.phone{justify-self:center;animation:rise 1s cubic-bezier(.2,.7,.2,1) both}
+.phone-frame{width:270px;height:552px;background:#141210;border-radius:40px;padding:11px;box-shadow:0 40px 80px color-mix(in srgb,var(--ink) 30%,transparent),0 0 0 1px color-mix(in srgb,var(--ink) 12%,transparent);position:relative}
+.phone-frame::before{content:'';position:absolute;top:13px;left:50%;transform:translateX(-50%);width:84px;height:22px;background:#141210;border-radius:12px;z-index:10}
+.phone-screen{width:100%;height:100%;background:var(--paper);border-radius:29px;overflow:hidden}
+.pscr-hdr{padding:42px 18px 12px;font-family:var(--serif);font-size:17px;font-weight:700}
+.pcard{margin:9px 13px;background:var(--white);border-radius:12px;overflow:hidden;border:1px solid var(--rule)}
+.pcard-g{height:56px}
+.pcard-b{padding:9px 11px;display:flex;justify-content:space-between;align-items:center}
+.pcard-t{font-size:12px;font-weight:600;color:var(--ink)}
+.pcard-s{font-size:9px;color:var(--ink3);font-family:var(--mono);margin-top:2px}
+.pcard-sc{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--accent)}
+
+/* STATS */
+.stats{background:var(--ink);color:var(--paper);padding:52px 40px}
+.stats-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.stat{text-align:center}
+.stat-n{font-family:var(--serif);font-size:clamp(34px,4.6vw,48px);font-weight:700;color:var(--accent2);font-variant-numeric:tabular-nums}
+.stat-l{font-family:var(--mono);font-size:10px;color:color-mix(in srgb,var(--paper) 45%,transparent);letter-spacing:.14em;text-transform:uppercase;margin-top:8px}
+
+/* SECTION SHELL */
+section.block{padding:104px 0;border-top:1px solid var(--rule)}
+.sec-tag{font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px}
+.sec-h{font-family:var(--serif);font-size:clamp(30px,4.6vw,46px);font-weight:700;letter-spacing:-.015em;text-wrap:balance;line-height:1.04}
+.center{text-align:center}
+
+/* FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;margin-top:8px}
+.feat{background:var(--white);border:1px solid var(--rule);border-radius:16px;padding:30px 28px;opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.feat.vis{opacity:1;transform:none}
+.feat-ic{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--accent) 12%,transparent);margin-bottom:18px}
+.feat-h{font-family:var(--serif);font-size:22px;font-weight:700;margin-bottom:9px}
+.feat-p{font-size:14.5px;color:var(--ink2);line-height:1.6}
+
+/* HOW */
+.how-phones{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-top:56px}
+.how-col{display:flex;flex-direction:column;align-items:center;gap:18px;opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.how-col.vis{opacity:1;transform:none}
+.how-pf{width:224px;height:428px;background:#141210;border-radius:32px;padding:9px;position:relative;box-shadow:0 24px 48px color-mix(in srgb,var(--ink) 18%,transparent)}
+.how-pf::before{content:'';position:absolute;top:11px;left:50%;transform:translateX(-50%);width:66px;height:18px;background:#141210;border-radius:10px;z-index:10}
+.how-ps{width:100%;height:100%;background:var(--paper);border-radius:24px;overflow:hidden}
+.how-ph{padding:32px 15px 9px;font-family:var(--serif);font-size:15px;font-weight:700}
+.how-cap{text-align:center}
+.how-cap b{font-family:var(--sans);font-size:16px;font-weight:600;display:block}
+.how-cap span{font-family:var(--mono);font-size:11px;color:var(--ink3);display:block;margin-top:5px;max-width:210px}
+.pill{font-size:8px;padding:4px 8px;border-radius:12px;font-family:var(--mono)}
+
+/* SHARE SHOWCASE */
+.showcase{background:var(--ink);color:var(--paper)}
+.showcase .sec-h{color:var(--paper)}
+.showcase .sec-tag{color:color-mix(in srgb,var(--paper) 34%,transparent)}
+.showcase-in{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:44px}
+.showcase-copy p{color:color-mix(in srgb,var(--paper) 62%,transparent);font-size:16px;max-width:400px;margin-top:16px}
+.ecard{background:var(--paper);color:var(--ink);border-radius:16px;padding:34px 34px 26px;max-width:440px;justify-self:center;box-shadow:0 40px 90px rgba(0,0,0,.45);position:relative;overflow:hidden}
+.ecard::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:var(--accent)}
+.ecard-wm{font-family:var(--serif);font-style:italic;font-weight:700;font-size:22px;color:var(--accent)}
+.ecard-kick{font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.12em;text-transform:uppercase;margin:24px 0 8px}
+.ecard-h{font-family:var(--serif);font-size:44px;font-weight:700;line-height:1;letter-spacing:-.01em}
+.ecard-v{font-size:17px;color:var(--ink2);margin-top:12px}
+.ecard-d{font-family:var(--mono);font-size:12px;color:var(--ink3);letter-spacing:.08em;margin-top:6px}
+.ecard-rule{height:1px;background:var(--rule);margin:22px 0 16px}
+.ecard-stats{display:flex;gap:26px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--ink3);letter-spacing:.06em;flex-wrap:wrap}
+.ecard-stats b{font-family:var(--mono);font-weight:500;color:var(--accent);font-size:18px;margin-right:5px}
+.ecard-star{color:var(--accent)}
+
+/* WEB SECTION */
+.web-in{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:40px}
+.web-copy p{color:var(--ink2);font-size:16px;max-width:420px;margin-top:16px}
+.web-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.web-chip{font-family:var(--mono);font-size:12px;padding:9px 15px;border:1px solid var(--rule);border-radius:999px;background:var(--white);color:var(--ink2);transition:border-color .18s,color .18s}
+.web-chip:hover{border-color:var(--accent);color:var(--accent)}
+.browser{background:var(--white);border:1px solid var(--rule);border-radius:14px;overflow:hidden;box-shadow:0 30px 60px color-mix(in srgb,var(--ink) 12%,transparent)}
+.browser-bar{display:flex;align-items:center;gap:7px;padding:12px 15px;border-bottom:1px solid var(--rule);background:var(--paper2)}
+.browser-dot{width:11px;height:11px;border-radius:50%}
+.browser-url{margin-left:12px;font-family:var(--mono);font-size:11px;color:var(--ink3);background:var(--white);border:1px solid var(--rule);border-radius:6px;padding:5px 11px;flex:1}
+.browser-body{padding:26px}
+.bl-kick{font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase}
+.bl-h{font-family:var(--serif);font-size:30px;font-weight:700;margin:8px 0 4px}
+.bl-sub{font-family:var(--mono);font-size:12px;color:var(--ink3)}
+.bl-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--rule);font-size:13px}
+.bl-row:last-child{border-bottom:none}
+.bl-row .n{font-family:var(--mono);color:var(--ink3);width:22px}
+.bl-row .t{flex:1;color:var(--ink)}
+
+/* CTA */
+.cta{text-align:center}
+.cta .sec-h{margin-bottom:14px}
+.cta .sec-h em{font-style:italic;color:var(--accent)}
+.cta-sub{font-family:var(--mono);font-size:13px;color:var(--ink2);margin-bottom:34px}
+.wait{max-width:440px;margin:0 auto;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.wait input{flex:1;min-width:220px;font-family:var(--mono);font-size:13px;padding:14px 16px;border:1.5px solid var(--rule);border-radius:9px;background:var(--white);color:var(--ink)}
+.wait input:focus{outline:none;border-color:var(--accent)}
+.wait-hp{position:absolute;left:-9999px}
+.wait-ok{font-family:var(--mono);font-size:13px;color:var(--accent);max-width:440px;margin:0 auto}
+.cta-store{margin-top:22px;font-family:var(--mono);font-size:11px;color:var(--ink3)}
+
+/* FOOTER */
+footer{padding:40px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.foot-logo{font-family:var(--serif);font-size:18px;font-weight:700;font-style:italic;color:var(--accent)}
+.foot-links{display:flex;gap:22px}
+.foot-links a{font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.04em}
+.foot-links a:hover{color:var(--ink)}
+.foot-copy{font-family:var(--mono);font-size:10px;color:var(--ink3)}
+
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.feat,.how-col{opacity:1!important;transform:none!important}}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding:120px 28px 70px;gap:44px;text-align:center}
+  .hero-sub{margin-left:auto;margin-right:auto}.hero-btns{justify-content:center}
+  .showcase-in,.web-in{grid-template-columns:1fr;gap:40px}
+  .web-copy,.showcase-copy{text-align:center}.web-copy p,.showcase-copy p{margin-left:auto;margin-right:auto}.web-links{justify-content:center}
+}
+@media (max-width:600px){
+  .wrap{padding:0 24px}.nav{padding:14px 24px}.nav-link.hide-sm{display:none}
+  .stats-in{grid-template-columns:repeat(2,1fr);gap:30px}
+  section.block{padding:76px 0}
+  .ecard-h{font-size:34px}.ecard{padding:26px 24px 22px}
+  footer{flex-direction:column;text-align:center}
+}
+@media (max-width:420px){.how-col:nth-child(3){display:none}}
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-logo">encore</div><button class="nav-btn" onclick="document.querySelector('.cta').scrollIntoView({behavior:'smooth'})">DOWNLOAD</button></nav>
+<nav class="nav">
+  <a class="nav-logo" href="/">encore</a>
+  <div class="nav-right">
+    <a class="nav-link hide-sm" id="nav-browse" href="#web">Browse the web</a>
+    <button class="btn btn-primary" onclick="scrollTo2('#get')">Get the app</button>
+  </div>
+</nav>
 
-<section class="hero">
+<!-- HERO -->
+<header class="hero">
   <div class="hero-text">
-    <div class="hero-tag">YOUR CONCERT DIARY</div>
-    <h1 class="hero-title">Remember<br>every <em>show.</em></h1>
-    <p class="hero-sub">Rate the concerts you go to. See what your friends thought. Build your live music history. Never forget a show again.</p>
-    <div class="hero-buttons">
-      <button class="btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> DOWNLOAD FOR IOS</button>
-      <button class="btn-ghost" onclick="document.querySelector('.how').scrollIntoView({behavior:'smooth'})">SEE HOW IT WORKS</button>
+    <p class="eyebrow">Your concert diary</p>
+    <h1>Remember<br>every <em>show.</em></h1>
+    <p class="hero-sub">Rate the concerts you go to. Keep a diary of every gig. See what your friends thought — and never forget a night again.</p>
+    <div class="hero-btns">
+      <button class="btn btn-accent" onclick="scrollTo2('#get')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Get early access
+      </button>
+      <a class="btn btn-ghost" id="hero-browse" href="#web">Browse the catalog →</a>
     </div>
+    <p class="hero-note">Free on iOS · No account needed to browse</p>
   </div>
   <div class="phone"><div class="phone-frame"><div class="phone-screen">
-    <div class="phone-hdr">Your Feed</div>
-    <div class="phone-card"><div class="phone-card-gradient" style="background:linear-gradient(135deg,#2a1a3a,#0F3460)"></div><div class="phone-card-body"><div><div class="phone-card-info">Radiohead</div><div class="phone-card-sub">Roundhouse · London</div></div><div class="phone-card-score">4.5</div></div></div>
-    <div class="phone-card"><div class="phone-card-gradient" style="background:linear-gradient(135deg,#1A3A1A,#2D5A2D)"></div><div class="phone-card-body"><div><div class="phone-card-info">Arctic Monkeys</div><div class="phone-card-sub">O2 Arena · London</div></div><div class="phone-card-score">4.8</div></div></div>
-    <div class="phone-card"><div class="phone-card-gradient" style="background:linear-gradient(135deg,#2D1B00,#8B4513)"></div><div class="phone-card-body"><div><div class="phone-card-info">Tame Impala</div><div class="phone-card-sub">Primavera · Barcelona</div></div><div class="phone-card-score">5.0</div></div></div>
-    <div class="phone-card"><div class="phone-card-gradient" style="background:linear-gradient(135deg,#0D1B2A,#2E86AB)"></div><div class="phone-card-body"><div><div class="phone-card-info">RAYE</div><div class="phone-card-sub">Montreux Jazz · Montreux</div></div><div class="phone-card-score">4.9</div></div></div>
+    <div class="pscr-hdr">Your Feed</div>
+    <div class="pcard"><div class="pcard-g" style="background:linear-gradient(135deg,#2a1a3a,#0F3460)"></div><div class="pcard-b"><div><div class="pcard-t">Radiohead</div><div class="pcard-s">Roundhouse · London</div></div><div class="pcard-sc">4.5</div></div></div>
+    <div class="pcard"><div class="pcard-g" style="background:linear-gradient(135deg,#1A3A1A,#2D5A2D)"></div><div class="pcard-b"><div><div class="pcard-t">Arctic Monkeys</div><div class="pcard-s">O2 Arena · London</div></div><div class="pcard-sc">4.8</div></div></div>
+    <div class="pcard"><div class="pcard-g" style="background:linear-gradient(135deg,#2D1B00,#8B4513)"></div><div class="pcard-b"><div><div class="pcard-t">Tame Impala</div><div class="pcard-s">Primavera · Barcelona</div></div><div class="pcard-sc">5.0</div></div></div>
+    <div class="pcard"><div class="pcard-g" style="background:linear-gradient(135deg,#0D1B2A,#2E86AB)"></div><div class="pcard-b"><div><div class="pcard-t">RAYE</div><div class="pcard-s">Montreux Jazz · Montreux</div></div><div class="pcard-sc">4.9</div></div></div>
   </div></div></div>
-</section>
+</header>
 
-<section class="stats">
-  <div><div class="stat-num">100K+</div><div class="stat-label">ARTISTS</div></div>
-  <div><div class="stat-num">300K+</div><div class="stat-label">CONCERTS</div></div>
-  <div><div class="stat-num">20K+</div><div class="stat-label">VENUES</div></div>
-  <div><div class="stat-num">350K+</div><div class="stat-label">ALBUMS</div></div>
-</section>
-
-<section class="features"><div class="features-grid">
-  <div class="feat"><div class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="feat-num">01</div><h3 class="feat-title">Rate every show</h3><p class="feat-desc">Log concerts you've attended. Rate the performance, sound, crowd, and venue. Build your personal concert history going back years.</p></div>
-  <div class="feat"><div class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="feat-num">02</div><h3 class="feat-title">Follow friends</h3><p class="feat-desc">See what your friends rated. Discover concerts through people with taste you trust. Your feed is your music community.</p></div>
-  <div class="feat"><div class="feat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div><div class="feat-num">03</div><h3 class="feat-title">Discover what's next</h3><p class="feat-desc">Browse upcoming concerts near you. Filter by genre, city, and date. Never miss a show from an artist you love.</p></div>
+<!-- STATS -->
+<section class="stats"><div class="stats-in">
+  <div class="stat"><div class="stat-n" data-to="3200000" data-suffix="M" data-div="1000000" data-dec="1">0</div><div class="stat-l">Concerts</div></div>
+  <div class="stat"><div class="stat-n" data-to="289000" data-suffix="K+" data-div="1000">0</div><div class="stat-l">Artists</div></div>
+  <div class="stat"><div class="stat-n" data-to="227000" data-suffix="K+" data-div="1000">0</div><div class="stat-l">Venues</div></div>
+  <div class="stat"><div class="stat-n" data-to="5900" data-suffix="K+" data-div="1000" data-dec="1">0</div><div class="stat-l">Festivals</div></div>
 </div></section>
 
-<section class="how">
-  <div class="how-header"><div class="how-tag">HOW IT WORKS</div><h2 class="how-title">Three taps to remember</h2></div>
+<!-- FEATURES -->
+<section class="block"><div class="wrap">
+  <p class="sec-tag">What you get</p>
+  <h2 class="sec-h" style="max-width:640px">A home for every show you've ever seen.</h2>
+  <div class="feat-grid">
+    <div class="feat"><div class="feat-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><h3 class="feat-h">Rate every show</h3><p class="feat-p">Log the concerts you attend and score the performance, sound, crowd and venue. Your live-music history, going back years.</p></div>
+    <div class="feat"><div class="feat-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3 class="feat-h">Follow friends</h3><p class="feat-p">See what people you trust rated. Discover shows through taste, not an algorithm. Your feed is your music community.</p></div>
+    <div class="feat"><div class="feat-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5v14M3 7h13l-2 3 2 3H3"/></svg></div><h3 class="feat-h">Setlists & lineups</h3><p class="feat-p">Every concert page carries its setlist, lineup and reviews — so you can relive a night song by song, or scout one before you go.</p></div>
+  </div>
+</div></section>
+
+<!-- HOW -->
+<section class="block"><div class="wrap center">
+  <p class="sec-tag">How it works</p>
+  <h2 class="sec-h">Three taps to remember.</h2>
   <div class="how-phones">
     <div class="how-col"><div class="how-pf"><div class="how-ps">
       <div class="how-ph">Discover</div>
       <div style="padding:10px 14px">
-        <div style="background:rgba(0,0,0,.05);border-radius:6px;padding:9px 10px;font-size:10px;color:#aaa;font-family:'DM Mono',monospace">Artists, concerts, venues...</div>
-        <div style="margin-top:10px;display:flex;gap:5px;flex-wrap:wrap"><span style="font-size:8px;padding:4px 8px;border-radius:12px;background:var(--ink);color:var(--paper);font-family:'DM Mono',monospace">All</span><span style="font-size:8px;padding:4px 8px;border-radius:12px;border:1px solid var(--rule);color:var(--ink3);font-family:'DM Mono',monospace">Artists</span><span style="font-size:8px;padding:4px 8px;border-radius:12px;border:1px solid var(--rule);color:var(--ink3);font-family:'DM Mono',monospace">Concerts</span></div>
-        <div style="margin-top:14px;font-family:'Playfair Display',serif;font-size:12px;font-weight:600;font-style:italic">Search for artists,<br>concerts or venues.</div>
-        <div style="margin-top:14px;font-size:7px;font-family:'DM Mono',monospace;color:var(--ink3);letter-spacing:.5px">BROWSE BY GENRE</div>
-        <div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap"><span style="font-size:7px;padding:3px 7px;border-radius:10px;background:rgba(0,0,0,.06);color:var(--ink2);font-family:'DM Mono',monospace">rock</span><span style="font-size:7px;padding:3px 7px;border-radius:10px;background:rgba(0,0,0,.06);color:var(--ink2);font-family:'DM Mono',monospace">indie</span><span style="font-size:7px;padding:3px 7px;border-radius:10px;background:rgba(0,0,0,.06);color:var(--ink2);font-family:'DM Mono',monospace">pop</span><span style="font-size:7px;padding:3px 7px;border-radius:10px;background:rgba(0,0,0,.06);color:var(--ink2);font-family:'DM Mono',monospace">electronic</span><span style="font-size:7px;padding:3px 7px;border-radius:10px;background:rgba(0,0,0,.06);color:var(--ink2);font-family:'DM Mono',monospace">jazz</span><span style="font-size:7px;padding:3px 7px;border-radius:10px;background:rgba(0,0,0,.06);color:var(--ink2);font-family:'DM Mono',monospace">metal</span></div>
+        <div style="background:color-mix(in srgb,var(--ink) 6%,transparent);border-radius:7px;padding:9px 10px;font-size:10px;color:var(--ink3);font-family:var(--mono)">Artists, concerts, venues…</div>
+        <div style="margin-top:11px;display:flex;gap:5px;flex-wrap:wrap"><span class="pill" style="background:var(--ink);color:var(--paper)">All</span><span class="pill" style="border:1px solid var(--rule);color:var(--ink3)">Artists</span><span class="pill" style="border:1px solid var(--rule);color:var(--ink3)">Concerts</span></div>
+        <div style="margin-top:16px;font-family:var(--serif);font-size:13px;font-weight:600;font-style:italic">Search for artists,<br>concerts or venues.</div>
+        <div style="margin-top:16px;font-size:7px;font-family:var(--mono);color:var(--ink3);letter-spacing:.1em">BROWSE BY GENRE</div>
+        <div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap">
+          <span class="pill" style="background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink2);font-size:7px">rock</span>
+          <span class="pill" style="background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink2);font-size:7px">indie</span>
+          <span class="pill" style="background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink2);font-size:7px">pop</span>
+          <span class="pill" style="background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink2);font-size:7px">electronic</span>
+          <span class="pill" style="background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink2);font-size:7px">jazz</span>
+        </div>
       </div>
-    </div></div><div class="how-label">Find the concert</div><div class="how-sublabel">Search 300K+ concerts by artist, venue, or city.</div></div>
+    </div></div><div class="how-cap"><b>Find the concert</b><span>Search 3.2M shows by artist, venue or city.</span></div></div>
 
     <div class="how-col"><div class="how-pf"><div class="how-ps">
       <div class="how-ph">Rate</div>
       <div style="padding:16px 14px;text-align:center">
-        <div style="font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:var(--accent);line-height:1">4.5</div>
-        <div style="font-size:8px;color:var(--ink3);font-family:'DM Mono',monospace;margin-top:4px;letter-spacing:.5px">YOUR RATING</div>
-        <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px;text-align:left">
-          <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;font-family:'DM Mono',monospace"><span style="color:var(--ink3)">Performance</span><div style="display:flex;gap:2px"><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span></div></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;font-family:'DM Mono',monospace"><span style="color:var(--ink3)">Sound</span><div style="display:flex;gap:2px"><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--rule);display:block"></span></div></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;font-family:'DM Mono',monospace"><span style="color:var(--ink3)">Crowd</span><div style="display:flex;gap:2px"><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--rule);display:block"></span></div></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;font-family:'DM Mono',monospace"><span style="color:var(--ink3)">Venue</span><div style="display:flex;gap:2px"><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span><span style="width:18px;height:4px;border-radius:2px;background:var(--accent);display:block"></span></div></div>
+        <div style="font-family:var(--serif);font-size:44px;font-weight:700;color:var(--accent);line-height:1">4.5</div>
+        <div style="font-size:8px;color:var(--ink3);font-family:var(--mono);margin-top:4px;letter-spacing:.1em">YOUR RATING</div>
+        <div style="margin-top:20px;display:flex;flex-direction:column;gap:11px;text-align:left">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;font-family:var(--mono)"><span style="color:var(--ink3)">Performance</span><div class="bars" data-f="5"></div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;font-family:var(--mono)"><span style="color:var(--ink3)">Sound</span><div class="bars" data-f="4"></div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;font-family:var(--mono)"><span style="color:var(--ink3)">Crowd</span><div class="bars" data-f="4"></div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:10px;font-family:var(--mono)"><span style="color:var(--ink3)">Venue</span><div class="bars" data-f="5"></div></div>
         </div>
-        <div style="margin-top:20px;background:rgba(0,0,0,.04);border-radius:8px;padding:10px;text-align:left"><div style="font-size:8px;color:var(--ink3);font-family:'DM Mono',monospace">REVIEW</div><div style="font-size:9px;color:var(--ink2);margin-top:4px;line-height:1.5">Absolutely incredible performance. Thom's voice was haunting...</div></div>
+        <div style="margin-top:20px;background:color-mix(in srgb,var(--ink) 5%,transparent);border-radius:9px;padding:10px;text-align:left"><div style="font-size:8px;color:var(--ink3);font-family:var(--mono)">REVIEW</div><div style="font-size:9px;color:var(--ink2);margin-top:4px;line-height:1.5">Absolutely incredible. Thom's voice was haunting all night…</div></div>
       </div>
-    </div></div><div class="how-label">Rate the show</div><div class="how-sublabel">Score performance, sound, crowd, and venue.</div></div>
+    </div></div><div class="how-cap"><b>Rate the show</b><span>Score performance, sound, crowd and venue.</span></div></div>
 
     <div class="how-col"><div class="how-pf"><div class="how-ps">
       <div class="how-ph">Your Feed</div>
       <div style="padding:8px 12px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="width:28px;height:28px;border-radius:14px;background:linear-gradient(135deg,#1A3A1A,#2D5A2D)"></div><div><div style="font-size:10px;font-weight:600">Sofia M.</div><div style="font-size:7px;color:var(--ink3);font-family:'DM Mono',monospace">rated a show</div></div></div>
-        <div style="background:#1a1a1a;border-radius:10px;overflow:hidden"><div style="height:70px;background:linear-gradient(135deg,#2a1a3a,#0F3460)"></div><div style="padding:8px 10px;margin-top:-16px;position:relative"><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--accent);line-height:1">4.5</div><div style="font-size:10px;font-weight:600;color:#fff">RAYE</div><div style="font-size:7px;color:#666;font-family:'DM Mono',monospace">Montreux Jazz · Jul 2024</div></div></div>
-        <div style="display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--rule)"><span style="font-size:8px;color:var(--ink3);font-family:'DM Mono',monospace">♡ 12</span><span style="font-size:8px;color:var(--ink3);font-family:'DM Mono',monospace">💬 3</span></div>
-        <div style="display:flex;align-items:center;gap:8px;margin-top:10px"><div style="width:28px;height:28px;border-radius:14px;background:linear-gradient(135deg,#2D1B00,#8B4513)"></div><div><div style="font-size:10px;font-weight:600">Marcus T.</div><div style="font-size:7px;color:var(--ink3);font-family:'DM Mono',monospace">rated a show</div></div></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#1A3A1A,#2D5A2D)"></div><div><div style="font-size:10px;font-weight:600">Sofia M.</div><div style="font-size:7px;color:var(--ink3);font-family:var(--mono)">rated a show</div></div></div>
+        <div style="background:#141210;border-radius:11px;overflow:hidden"><div style="height:70px;background:linear-gradient(135deg,#2a1a3a,#0F3460)"></div><div style="padding:8px 10px;margin-top:-16px;position:relative"><div style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--accent);line-height:1">4.5</div><div style="font-size:10px;font-weight:600;color:#fff">RAYE</div><div style="font-size:7px;color:#8f887d;font-family:var(--mono)">Montreux Jazz · Jul 2024</div></div></div>
+        <div style="display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--rule)"><span style="font-size:8px;color:var(--ink3);font-family:var(--mono)">♡ 12</span><span style="font-size:8px;color:var(--ink3);font-family:var(--mono)">💬 3</span></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:10px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#2D1B00,#8B4513)"></div><div><div style="font-size:10px;font-weight:600">Marcus T.</div><div style="font-size:7px;color:var(--ink3);font-family:var(--mono)">rated a show</div></div></div>
       </div>
-    </div></div><div class="how-label">Share and discover</div><div class="how-sublabel">See what friends thought. Build your music community.</div></div>
+    </div></div><div class="how-cap"><b>Share & discover</b><span>See what friends thought. Build your scene.</span></div></div>
   </div>
-</section>
+</div></section>
 
-<section class="share"><div class="share-tag">SHARE YOUR EXPERIENCE</div><h2 class="share-title">Beautiful concert cards</h2><div class="share-card"><div class="share-card-img"></div><div class="share-card-info"><div class="share-score">4.5</div><div class="share-artist">RADIOHEAD</div><div class="share-venue">Roundhouse, London<br>18 July 2024</div><div class="share-brand">encore</div></div></div></section>
+<!-- SHARE SHOWCASE -->
+<section class="block showcase"><div class="wrap">
+  <p class="sec-tag">Share your nights</p>
+  <div class="showcase-in">
+    <div class="showcase-copy">
+      <h2 class="sec-h">Every show becomes a card worth sharing.</h2>
+      <p>Post your rating, your year in gigs, or a whole festival — as a card built in Encore's own style. One tap to your story, and a link that opens the show for whoever taps it.</p>
+    </div>
+    <div class="ecard">
+      <div class="ecard-wm">Encore</div>
+      <div class="ecard-kick">Concert</div>
+      <div class="ecard-h">Radiohead</div>
+      <div class="ecard-v">Madison Square Garden · New York</div>
+      <div class="ecard-d">14 JUNE 2024</div>
+      <div class="ecard-rule"></div>
+      <div class="ecard-stats"><span><b>21</b>SONGS</span><span><span class="ecard-star">★</span> <b>4.6</b>/5</span><span><b>128</b>WERE THERE</span></div>
+    </div>
+  </div>
+</div></section>
 
-<section class="cta"><h2 class="cta-title">Start logging<br>your <em>concerts.</em></h2><p class="cta-sub">Free on iOS. No account needed to browse.</p><div class="hero-buttons" style="justify-content:center"><button class="btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg> DOWNLOAD FOR IOS</button></div></section>
+<!-- WEB SECTION -->
+<section class="block" id="web"><div class="wrap">
+  <p class="sec-tag">On the web, too</p>
+  <div class="web-in">
+    <div class="web-copy">
+      <h2 class="sec-h">The whole catalog, in your browser.</h2>
+      <p>Every one of 3.2 million concerts — plus every artist, venue and festival — has its own page you can read and share without installing anything. Great for looking up a setlist or sharing a show with a friend.</p>
+      <div class="web-links">
+        <a class="web-chip" data-path="/concerts">Concerts →</a>
+        <a class="web-chip" data-path="/artists">Artists →</a>
+        <a class="web-chip" data-path="/festivals">Festivals →</a>
+        <a class="web-chip" data-path="/venues">Venues →</a>
+      </div>
+    </div>
+    <div class="browser">
+      <div class="browser-bar">
+        <span class="browser-dot" style="background:#E0885A"></span><span class="browser-dot" style="background:#D9B84A"></span><span class="browser-dot" style="background:#7FA05A"></span>
+        <span class="browser-url">encoreapp.to/c/radiohead-msg</span>
+      </div>
+      <div class="browser-body">
+        <div class="bl-kick">Concert · 14 Jun 2024</div>
+        <div class="bl-h">Radiohead</div>
+        <div class="bl-sub">Madison Square Garden · New York</div>
+        <div style="margin:18px 0 6px;font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase">Setlist · 21</div>
+        <div class="bl-row"><span class="n">1</span><span class="t">Let Down</span></div>
+        <div class="bl-row"><span class="n">2</span><span class="t">2 + 2 = 5</span></div>
+        <div class="bl-row"><span class="n">3</span><span class="t">Idioteque</span></div>
+        <div class="bl-row"><span class="n">4</span><span class="t">Weird Fishes / Arpeggi</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
 
-<footer class="footer"><div class="footer-logo">encore</div><div class="footer-links">
-  <a href="/privacy.html">Privacy</a>
-  <a href="/terms.html">Terms</a>
-  <a href="mailto:hello@encoreapp.to">Contact</a>
-  <a href="#">Instagram</a>
-</div><div class="footer-copy">&copy; 2026 Encore. Made for concertgoers.</div></footer>
+<!-- CTA -->
+<section class="block cta" id="get"><div class="wrap">
+  <p class="sec-tag" style="color:var(--ink3)">Get Encore</p>
+  <h2 class="sec-h">Start your concert <em>diary.</em></h2>
+  <p class="cta-sub">Launching on iOS soon. Join the list — one email when it lands, nothing else.</p>
+  <form class="wait" id="wait-form">
+    <input type="email" name="email" required placeholder="you@example.com" aria-label="Email address" autocomplete="email">
+    <input class="wait-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="btn btn-accent" type="submit">Get early access</button>
+  </form>
+  <p class="wait-ok" id="wait-ok" hidden>✓ You're on the list. We'll email you the moment Encore hits the App&nbsp;Store.</p>
+  <p class="cta-store">Free · iPhone · No account needed to browse the web</p>
+</div></section>
+
+<footer>
+  <a class="foot-logo" href="/">encore</a>
+  <div class="foot-links">
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/support.html">Support</a>
+    <a href="mailto:hello@encoreapp.to">Contact</a>
+  </div>
+  <div class="foot-copy">© 2026 Encore · Made for concertgoers</div>
+</footer>
 
 <script>
-const obs=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting)setTimeout(()=>en.target.classList.add('visible'),i*150)})},{threshold:.15});
-document.querySelectorAll('.feat,.how-col').forEach(el=>obs.observe(el));
-const so=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){en.target.querySelectorAll('.stat-num').forEach(el=>{const t=el.textContent,m=t.match(/(\d+)/);if(!m)return;const tg=parseInt(m[1]),sx=t.replace(m[1],'');let c=0;const s=Math.ceil(tg/40),ti=setInterval(()=>{c=Math.min(c+s,tg);el.textContent=c.toLocaleString()+sx;if(c>=tg)clearInterval(ti)},30)});so.unobserve(en.target)}})},{threshold:.5});
+// Where the browsable catalog lives. Same origin once encoreapp.to serves it;
+// until then point at the live backend host.
+const CATALOG_URL = "https://giglog-backend-production.up.railway.app";
+const WAITLIST_URL = CATALOG_URL + "/waitlist/";
+
+document.querySelectorAll('[data-path]').forEach(a => a.href = CATALOG_URL + a.dataset.path);
+document.getElementById('hero-browse').href = '#web';
+document.getElementById('nav-browse').href = '#web';
+
+function scrollTo2(sel){document.querySelector(sel).scrollIntoView({behavior:'smooth'});}
+
+// Rating bars in the "Rate" mockup
+document.querySelectorAll('.bars').forEach(el=>{
+  const f=+el.dataset.f;
+  el.style.cssText='display:flex;gap:2px';
+  for(let i=0;i<5;i++){const s=document.createElement('span');s.style.cssText=`width:18px;height:4px;border-radius:2px;display:block;background:${i<f?'var(--accent)':'var(--rule)'}`;el.appendChild(s);}
+});
+
+// Reveal on scroll
+const io=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*120);io.unobserve(e.target);}})},{threshold:.16});
+document.querySelectorAll('.feat,.how-col').forEach(el=>io.observe(el));
+
+// Animated stat counters
+function fmt(v,div,dec,suffix){const n=v/div;return (dec?n.toFixed(dec):Math.round(n).toLocaleString())+suffix;}
+const so=new IntersectionObserver((es)=>{es.forEach(e=>{if(!e.isIntersecting)return;e.target.querySelectorAll('.stat-n').forEach(el=>{
+  const to=+el.dataset.to,div=+el.dataset.div||1,dec=+el.dataset.dec||0,suffix=el.dataset.suffix||'';
+  let c=0;const step=to/38;const t=setInterval(()=>{c=Math.min(c+step,to);el.textContent=fmt(c,div,dec,suffix);if(c>=to)clearInterval(t);},28);
+});so.unobserve(e.target);});},{threshold:.5});
 so.observe(document.querySelector('.stats'));
+
+// Waitlist — posts to the backend; graceful inline success.
+document.getElementById('wait-form').addEventListener('submit',async(ev)=>{
+  ev.preventDefault();
+  const f=ev.target, email=f.email.value.trim(); if(!email) return;
+  if(f.website.value) return; // honeypot
+  const body=new URLSearchParams({email,website:'',source_path:'/'});
+  try{ await fetch(WAITLIST_URL,{method:'POST',body,headers:{'Content-Type':'application/x-www-form-urlencoded'},mode:'no-cors'}); }catch(e){}
+  f.hidden=true; document.getElementById('wait-ok').hidden=false;
+});
 </script>
 </body>
 </html>
