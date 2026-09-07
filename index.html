@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Encore — Your Concert Diary</title>
-<meta name="description" content="Rate the shows you go to, keep a diary of every gig, and see what your friends thought. 3.2 million concerts. Free on iOS.">
+<title>Encore — Your Concert Log</title>
+<meta name="description" content="Rate the shows you go to, keep a log of every gig, and see what your friends thought. 3.2 million concerts. Free on iOS.">
 <link rel="canonical" href="https://encoreapp.to/">
 <meta name="theme-color" content="#F5F0E8" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#211F1C" media="(prefers-color-scheme: dark)">
 <!-- Social unfurl -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Encore">
-<meta property="og:title" content="Encore — Your Concert Diary">
-<meta property="og:description" content="Rate every show, keep a diary of every gig, and see what your friends thought. 3.2 million concerts.">
+<meta property="og:title" content="Encore — Your Concert Log">
+<meta property="og:description" content="Rate every show, keep a log of every gig, and see what your friends thought. 3.2 million concerts.">
 <meta property="og:url" content="https://encoreapp.to/">
 <meta property="og:image" content="https://encoreapp.to/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Encore — Your Concert Diary">
-<meta name="twitter:description" content="Rate every show, keep a diary of every gig, and see what your friends thought.">
+<meta name="twitter:title" content="Encore — Your Concert Log">
+<meta name="twitter:description" content="Rate every show, keep a log of every gig, and see what your friends thought.">
 <meta name="twitter:image" content="https://encoreapp.to/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23D4763C'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-style='italic' font-weight='700' fill='%23F5F0E8' text-anchor='middle'%3Ee%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,6 +27,7 @@
 :root{
   --paper:#F5F0E8; --paper2:#EDE8DF; --ink:#2C2C2A; --ink2:#5A5A56; --ink3:#8A8A84;
   --accent:#C4622D; --accent2:#E0885A; --rule:#DDD8CC; --white:#FFFDF8;
+  --stat-num:#F0A878;
   --card:#1c1a18; --card-ink:#F5F0E8; --card-ink3:#8f887d;
   --serif:'Playfair Display',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
   --mono:'DM Mono',ui-monospace,Menlo,monospace;
@@ -34,6 +35,7 @@
 @media (prefers-color-scheme:dark){:root{
   --paper:#211F1C; --paper2:#2A2825; --ink:#F2EDE3; --ink2:#C7C0B4; --ink3:#8F887D;
   --accent:#E0885A; --accent2:#EBA983; --rule:#3A3630; --white:#2A2825;
+  --stat-num:#C4622D;
 }}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -72,7 +74,7 @@ a{color:inherit;text-decoration:none}
 .phone-screen{width:100%;height:100%;background:var(--paper);border-radius:29px;overflow:hidden}
 .pscr-hdr{padding:42px 18px 12px;font-family:var(--serif);font-size:17px;font-weight:700}
 .pcard{margin:9px 13px;background:var(--white);border-radius:12px;overflow:hidden;border:1px solid var(--rule)}
-.pcard-g{height:56px}
+.pcard-g{height:96px;background-size:cover;background-position:center 22%;background-repeat:no-repeat}
 .pcard-b{padding:9px 11px;display:flex;justify-content:space-between;align-items:center}
 .pcard-t{font-size:12px;font-weight:600;color:var(--ink)}
 .pcard-s{font-size:9px;color:var(--ink3);font-family:var(--mono);margin-top:2px}
@@ -82,7 +84,7 @@ a{color:inherit;text-decoration:none}
 .stats{background:var(--ink);color:var(--paper);padding:52px 40px}
 .stats-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .stat{text-align:center}
-.stat-n{font-family:var(--serif);font-size:clamp(34px,4.6vw,48px);font-weight:700;color:var(--accent2);font-variant-numeric:tabular-nums}
+.stat-n{font-family:var(--serif);font-size:clamp(42px,5.6vw,60px);font-weight:700;color:var(--stat-num);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .stat-l{font-family:var(--mono);font-size:10px;color:color-mix(in srgb,var(--paper) 45%,transparent);letter-spacing:.14em;text-transform:uppercase;margin-top:8px}
 
 /* SECTION SHELL */
@@ -199,9 +201,9 @@ footer{padding:40px;border-top:1px solid var(--rule);display:flex;justify-conten
 <!-- HERO -->
 <header class="hero">
   <div class="hero-text">
-    <p class="eyebrow">Your concert diary</p>
+    <p class="eyebrow">Your concert log</p>
     <h1>Remember<br>every <em>show.</em></h1>
-    <p class="hero-sub">Rate the concerts you go to. Keep a diary of every gig. See what your friends thought — and never forget a night again.</p>
+    <p class="hero-sub">Rate the concerts you go to. Keep a log of every gig. See what your friends thought — and never forget a night again.</p>
     <div class="hero-btns">
       <button class="btn btn-accent" onclick="scrollTo2('#get')">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -213,10 +215,10 @@ footer{padding:40px;border-top:1px solid var(--rule);display:flex;justify-conten
   </div>
   <div class="phone"><div class="phone-frame"><div class="phone-screen">
     <div class="pscr-hdr">Your Feed</div>
-    <div class="pcard"><div class="pcard-g" style="background:linear-gradient(135deg,#2a1a3a,#0F3460)"></div><div class="pcard-b"><div><div class="pcard-t">Radiohead</div><div class="pcard-s">Roundhouse · London</div></div><div class="pcard-sc">4.5</div></div></div>
-    <div class="pcard"><div class="pcard-g" style="background:linear-gradient(135deg,#1A3A1A,#2D5A2D)"></div><div class="pcard-b"><div><div class="pcard-t">Arctic Monkeys</div><div class="pcard-s">O2 Arena · London</div></div><div class="pcard-sc">4.8</div></div></div>
-    <div class="pcard"><div class="pcard-g" style="background:linear-gradient(135deg,#2D1B00,#8B4513)"></div><div class="pcard-b"><div><div class="pcard-t">Tame Impala</div><div class="pcard-s">Primavera · Barcelona</div></div><div class="pcard-sc">5.0</div></div></div>
-    <div class="pcard"><div class="pcard-g" style="background:linear-gradient(135deg,#0D1B2A,#2E86AB)"></div><div class="pcard-b"><div><div class="pcard-t">RAYE</div><div class="pcard-s">Montreux Jazz · Montreux</div></div><div class="pcard-sc">4.9</div></div></div>
+    <div class="pcard"><div class="pcard-g" style="background-image:url('https://i.scdn.co/image/ab6761610000e5eb4104fbd80f1f795728abbd59')"></div><div class="pcard-b"><div><div class="pcard-t">Radiohead</div><div class="pcard-s">Roundhouse · London</div></div><div class="pcard-sc">4.5</div></div></div>
+    <div class="pcard"><div class="pcard-g" style="background-image:url('https://i.scdn.co/image/ab6761610000e5eb7da39dea0a72f581535fb11f')"></div><div class="pcard-b"><div><div class="pcard-t">Arctic Monkeys</div><div class="pcard-s">O2 Arena · London</div></div><div class="pcard-sc">4.8</div></div></div>
+    <div class="pcard"><div class="pcard-g" style="background-image:url('https://i.scdn.co/image/ab6761610000e5ebe412a782245eb20d9626c601')"></div><div class="pcard-b"><div><div class="pcard-t">Tame Impala</div><div class="pcard-s">Primavera · Barcelona</div></div><div class="pcard-sc">5.0</div></div></div>
+    <div class="pcard"><div class="pcard-g" style="background-image:url('https://i.scdn.co/image/ab6761610000e5ebde2e2ac1d53fdf9518354798')"></div><div class="pcard-b"><div><div class="pcard-t">RAYE</div><div class="pcard-s">Montreux Jazz · Montreux</div></div><div class="pcard-sc">4.9</div></div></div>
   </div></div></div>
 </header>
 
@@ -280,7 +282,7 @@ footer{padding:40px;border-top:1px solid var(--rule);display:flex;justify-conten
       <div class="how-ph">Your Feed</div>
       <div style="padding:8px 12px">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#1A3A1A,#2D5A2D)"></div><div><div style="font-size:10px;font-weight:600">Sofia M.</div><div style="font-size:7px;color:var(--ink3);font-family:var(--mono)">rated a show</div></div></div>
-        <div style="background:#141210;border-radius:11px;overflow:hidden"><div style="height:70px;background:linear-gradient(135deg,#2a1a3a,#0F3460)"></div><div style="padding:8px 10px;margin-top:-16px;position:relative"><div style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--accent);line-height:1">4.5</div><div style="font-size:10px;font-weight:600;color:#fff">RAYE</div><div style="font-size:7px;color:#8f887d;font-family:var(--mono)">Montreux Jazz · Jul 2024</div></div></div>
+        <div style="background:#141210;border-radius:11px;overflow:hidden"><div style="position:relative;height:104px;background-image:url('https://i.scdn.co/image/ab6761610000e5ebde2e2ac1d53fdf9518354798');background-size:cover;background-position:center 20%"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,8,6,.94) 14%,transparent 64%)"></div><div style="position:absolute;left:11px;right:11px;bottom:9px;display:flex;align-items:flex-end;justify-content:space-between"><div><div style="font-size:11px;font-weight:700;color:#fff;line-height:1.15">RAYE</div><div style="font-size:7px;color:#d8d2c8;font-family:var(--mono);margin-top:2px">Montreux Jazz · Jul 2024</div></div><div style="font-family:var(--serif);font-size:23px;font-weight:700;color:var(--accent2);line-height:.9">4.5</div></div></div></div>
         <div style="display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--rule)"><span style="font-size:8px;color:var(--ink3);font-family:var(--mono)">♡ 12</span><span style="font-size:8px;color:var(--ink3);font-family:var(--mono)">💬 3</span></div>
         <div style="display:flex;align-items:center;gap:8px;margin-top:10px"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#2D1B00,#8B4513)"></div><div><div style="font-size:10px;font-weight:600">Marcus T.</div><div style="font-size:7px;color:var(--ink3);font-family:var(--mono)">rated a show</div></div></div>
       </div>
@@ -344,7 +346,7 @@ footer{padding:40px;border-top:1px solid var(--rule);display:flex;justify-conten
 <!-- CTA -->
 <section class="block cta" id="get"><div class="wrap">
   <p class="sec-tag" style="color:var(--ink3)">Get Encore</p>
-  <h2 class="sec-h">Start your concert <em>diary.</em></h2>
+  <h2 class="sec-h">Start your concert <em>log.</em></h2>
   <p class="cta-sub">Launching on iOS soon. Join the list — one email when it lands, nothing else.</p>
   <form class="wait" id="wait-form">
     <input type="email" name="email" required placeholder="you@example.com" aria-label="Email address" autocomplete="email">
