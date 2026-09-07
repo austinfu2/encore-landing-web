@@ -27,7 +27,7 @@
 :root{
   --paper:#F5F0E8; --paper2:#EDE8DF; --ink:#2C2C2A; --ink2:#5A5A56; --ink3:#8A8A84;
   --accent:#C4622D; --accent2:#E0885A; --rule:#DDD8CC; --white:#FFFDF8;
-  --stat-num:#F0A878;
+  --stat-bg:#211E1A; --stat-num:#EFA877; --stat-lbl:rgba(245,240,232,.52); --stat-rule:rgba(245,240,232,.12);
   --card:#1c1a18; --card-ink:#F5F0E8; --card-ink3:#8f887d;
   --serif:'Playfair Display',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
   --mono:'DM Mono',ui-monospace,Menlo,monospace;
@@ -35,7 +35,7 @@
 @media (prefers-color-scheme:dark){:root{
   --paper:#211F1C; --paper2:#2A2825; --ink:#F2EDE3; --ink2:#C7C0B4; --ink3:#8F887D;
   --accent:#E0885A; --accent2:#EBA983; --rule:#3A3630; --white:#2A2825;
-  --stat-num:#C4622D;
+  --stat-bg:#16140F; --stat-num:#F0A878; --stat-lbl:rgba(245,240,232,.5); --stat-rule:rgba(245,240,232,.1);
 }}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -78,14 +78,16 @@ a{color:inherit;text-decoration:none}
 .pcard-b{padding:9px 11px;display:flex;justify-content:space-between;align-items:center}
 .pcard-t{font-size:12px;font-weight:600;color:var(--ink)}
 .pcard-s{font-size:9px;color:var(--ink3);font-family:var(--mono);margin-top:2px}
+.pcard-d{font-size:8.5px;color:var(--ink3);font-family:var(--mono);margin-top:3px;letter-spacing:.03em;opacity:.85}
 .pcard-sc{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--accent)}
 
 /* STATS */
-.stats{background:var(--ink);color:var(--paper);padding:52px 40px}
-.stats-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.stat{text-align:center}
-.stat-n{font-family:var(--serif);font-size:clamp(42px,5.6vw,60px);font-weight:700;color:var(--stat-num);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.stat-l{font-family:var(--mono);font-size:10px;color:color-mix(in srgb,var(--paper) 45%,transparent);letter-spacing:.14em;text-transform:uppercase;margin-top:8px}
+.stats{background:var(--stat-bg);color:#F5F0E8;padding:60px 40px;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.stats-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stat{text-align:center;padding:6px 20px;position:relative}
+.stat+.stat::before{content:'';position:absolute;left:0;top:14%;height:72%;width:1px;background:var(--stat-rule)}
+.stat-n{font-family:var(--serif);font-size:clamp(46px,6vw,66px);font-weight:700;color:var(--stat-num);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat-l{font-family:var(--mono);font-size:11px;color:var(--stat-lbl);letter-spacing:.16em;text-transform:uppercase;margin-top:12px}
 
 /* SECTION SHELL */
 section.block{padding:104px 0;border-top:1px solid var(--rule)}
@@ -94,7 +96,7 @@ section.block{padding:104px 0;border-top:1px solid var(--rule)}
 .center{text-align:center}
 
 /* FEATURES */
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;margin-top:8px}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;margin-top:46px}
 .feat{background:var(--white);border:1px solid var(--rule);border-radius:16px;padding:30px 28px;opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
 .feat.vis{opacity:1;transform:none}
 .feat-ic{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--accent) 12%,transparent);margin-bottom:18px}
@@ -120,17 +122,18 @@ section.block{padding:104px 0;border-top:1px solid var(--rule)}
 .showcase .sec-tag{color:color-mix(in srgb,var(--paper) 34%,transparent)}
 .showcase-in{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:44px}
 .showcase-copy p{color:color-mix(in srgb,var(--paper) 62%,transparent);font-size:16px;max-width:400px;margin-top:16px}
-.ecard{background:var(--paper);color:var(--ink);border-radius:16px;padding:34px 34px 26px;max-width:440px;justify-self:center;box-shadow:0 40px 90px rgba(0,0,0,.45);position:relative;overflow:hidden}
-.ecard::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:var(--accent)}
-.ecard-wm{font-family:var(--serif);font-style:italic;font-weight:700;font-size:22px;color:var(--accent)}
-.ecard-kick{font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.12em;text-transform:uppercase;margin:24px 0 8px}
-.ecard-h{font-family:var(--serif);font-size:44px;font-weight:700;line-height:1;letter-spacing:-.01em}
-.ecard-v{font-size:17px;color:var(--ink2);margin-top:12px}
-.ecard-d{font-family:var(--mono);font-size:12px;color:var(--ink3);letter-spacing:.08em;margin-top:6px}
-.ecard-rule{height:1px;background:var(--rule);margin:22px 0 16px}
-.ecard-stats{display:flex;gap:26px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--ink3);letter-spacing:.06em;flex-wrap:wrap}
-.ecard-stats b{font-family:var(--mono);font-weight:500;color:var(--accent);font-size:18px;margin-right:5px}
-.ecard-star{color:var(--accent)}
+.ecard{background:var(--card);color:#F5F0E8;border-radius:18px;max-width:420px;justify-self:center;box-shadow:0 40px 90px rgba(0,0,0,.5);position:relative;overflow:hidden}
+.ecard-img{position:relative;height:400px;background-size:cover;background-position:center 18%;display:flex;flex-direction:column;justify-content:flex-end}
+.ecard-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,8,.97) 6%,rgba(12,10,8,.55) 40%,transparent 72%)}
+.ecard-wm{position:absolute;top:20px;left:22px;z-index:2;font-family:var(--serif);font-style:italic;font-weight:700;font-size:18px;color:rgba(245,240,232,.92)}
+.ecard-badge{position:absolute;top:18px;right:18px;z-index:2;font-family:var(--mono);font-size:12px;color:#fff;background:rgba(0,0,0,.42);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:6px 11px;border-radius:999px;letter-spacing:.02em}
+.ecard-meta{position:relative;z-index:2;padding:0 24px 22px}
+.ecard-kick{font-family:var(--mono);font-size:11px;color:rgba(245,240,232,.68);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.ecard-h{font-family:var(--serif);font-size:44px;font-weight:700;line-height:1;letter-spacing:-.01em;color:#F5F0E8}
+.ecard-v{font-family:var(--mono);font-size:12px;color:rgba(245,240,232,.72);margin-top:9px;letter-spacing:.02em}
+.ecard-foot{display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:15px 24px;font-family:var(--mono);font-size:11px;color:var(--card-ink3);letter-spacing:.05em}
+.ecard-foot b{color:var(--accent2);font-weight:500;font-size:15px;margin-right:5px}
+.ecard-star{color:var(--accent2)}
 
 /* WEB SECTION */
 .web-in{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:40px}
@@ -183,7 +186,7 @@ footer{padding:40px;border-top:1px solid var(--rule);display:flex;justify-conten
   .wrap{padding:0 24px}.nav{padding:14px 24px}.nav-link.hide-sm{display:none}
   .stats-in{grid-template-columns:repeat(2,1fr);gap:30px}
   section.block{padding:76px 0}
-  .ecard-h{font-size:34px}.ecard{padding:26px 24px 22px}
+  .ecard-h{font-size:36px}.ecard-img{height:340px}
   footer{flex-direction:column;text-align:center}
 }
 @media (max-width:420px){.how-col:nth-child(3){display:none}}
@@ -215,10 +218,10 @@ footer{padding:40px;border-top:1px solid var(--rule);display:flex;justify-conten
   </div>
   <div class="phone"><div class="phone-frame"><div class="phone-screen">
     <div class="pscr-hdr">Your Feed</div>
-    <div class="pcard"><div class="pcard-g" style="background-image:url('https://i.scdn.co/image/ab6761610000e5eb4104fbd80f1f795728abbd59')"></div><div class="pcard-b"><div><div class="pcard-t">Radiohead</div><div class="pcard-s">Roundhouse · London</div></div><div class="pcard-sc">4.5</div></div></div>
-    <div class="pcard"><div class="pcard-g" style="background-image:url('https://i.scdn.co/image/ab6761610000e5eb7da39dea0a72f581535fb11f')"></div><div class="pcard-b"><div><div class="pcard-t">Arctic Monkeys</div><div class="pcard-s">O2 Arena · London</div></div><div class="pcard-sc">4.8</div></div></div>
-    <div class="pcard"><div class="pcard-g" style="background-image:url('https://i.scdn.co/image/ab6761610000e5ebe412a782245eb20d9626c601')"></div><div class="pcard-b"><div><div class="pcard-t">Tame Impala</div><div class="pcard-s">Primavera · Barcelona</div></div><div class="pcard-sc">5.0</div></div></div>
-    <div class="pcard"><div class="pcard-g" style="background-image:url('https://i.scdn.co/image/ab6761610000e5ebde2e2ac1d53fdf9518354798')"></div><div class="pcard-b"><div><div class="pcard-t">RAYE</div><div class="pcard-s">Montreux Jazz · Montreux</div></div><div class="pcard-sc">4.9</div></div></div>
+    <div class="pcard"><div class="pcard-g" style="background-image:url('https://i.scdn.co/image/ab6761610000e5eb4104fbd80f1f795728abbd59')"></div><div class="pcard-b"><div><div class="pcard-t">Radiohead</div><div class="pcard-s">Roundhouse · London</div><div class="pcard-d">18 Jul 2024</div></div><div class="pcard-sc">4.5</div></div></div>
+    <div class="pcard"><div class="pcard-g" style="background-image:url('https://i.scdn.co/image/ab6761610000e5eb7da39dea0a72f581535fb11f')"></div><div class="pcard-b"><div><div class="pcard-t">Arctic Monkeys</div><div class="pcard-s">O2 Arena · London</div><div class="pcard-d">9 Jun 2023</div></div><div class="pcard-sc">4.8</div></div></div>
+    <div class="pcard"><div class="pcard-g" style="background-image:url('https://i.scdn.co/image/ab6761610000e5ebe412a782245eb20d9626c601')"></div><div class="pcard-b"><div><div class="pcard-t">Tame Impala</div><div class="pcard-s">Primavera · Barcelona</div><div class="pcard-d">1 Jun 2024</div></div><div class="pcard-sc">5.0</div></div></div>
+    <div class="pcard"><div class="pcard-g" style="background-image:url('https://i.scdn.co/image/ab6761610000e5ebde2e2ac1d53fdf9518354798')"></div><div class="pcard-b"><div><div class="pcard-t">RAYE</div><div class="pcard-s">Montreux Jazz · Montreux</div><div class="pcard-d">13 Jul 2024</div></div><div class="pcard-sc">4.9</div></div></div>
   </div></div></div>
 </header>
 
@@ -299,13 +302,16 @@ footer{padding:40px;border-top:1px solid var(--rule);display:flex;justify-conten
       <p>Post your rating, your year in gigs, or a whole festival. One tap to your story.</p>
     </div>
     <div class="ecard">
-      <div class="ecard-wm">Encore</div>
-      <div class="ecard-kick">Concert</div>
-      <div class="ecard-h">Radiohead</div>
-      <div class="ecard-v">Madison Square Garden · New York</div>
-      <div class="ecard-d">14 JUNE 2024</div>
-      <div class="ecard-rule"></div>
-      <div class="ecard-stats"><span><b>21</b>SONGS</span><span><span class="ecard-star">★</span> <b>4.6</b>/5</span><span><b>128</b>WERE THERE</span></div>
+      <div class="ecard-img" style="background-image:url('https://i.scdn.co/image/ab6761610000e5eb4104fbd80f1f795728abbd59')">
+        <div class="ecard-wm">encore</div>
+        <div class="ecard-badge"><span class="ecard-star">★</span> 4.6</div>
+        <div class="ecard-meta">
+          <div class="ecard-kick">Concert · 14 June 2024</div>
+          <div class="ecard-h">Radiohead</div>
+          <div class="ecard-v">Madison Square Garden · New York</div>
+        </div>
+      </div>
+      <div class="ecard-foot"><span><b>21</b> songs</span><span><span class="ecard-star">★</span> <b>4.6</b>/5</span><span><b>128</b> were there</span></div>
     </div>
   </div>
 </div></section>
