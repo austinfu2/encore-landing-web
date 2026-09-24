@@ -377,7 +377,7 @@ footer{padding:40px;border-top:1px solid var(--rule);display:flex;justify-conten
 <script>
 // Where the browsable catalog lives. Same origin once getreso.app serves it;
 // until then point at the live backend host.
-const CATALOG_URL = "https://giglog-backend-production.up.railway.app";
+const CATALOG_URL = "https://app.getreso.app";
 const WAITLIST_URL = CATALOG_URL + "/waitlist/";
 
 document.querySelectorAll('[data-path]').forEach(a => a.href = CATALOG_URL + a.dataset.path);
