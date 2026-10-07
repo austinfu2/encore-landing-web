@@ -1,0 +1,26 @@
+# The catalogue lives on app.getreso.app. Until Sep 24 these paths were
+# proxied here, so Google still has getreso.app/c/…, /a/…, /v/… on file and
+# was getting 404s for them. A 301 moves those links (and any ranking they
+# earned) to the real pages, and costs no bandwidth — unlike the old proxy.
+# Query strings carry over. Not redirected: /robots.txt and /.well-known/
+# (each host keeps its own; app links only claim app.getreso.app).
+
+/c/*          https://app.getreso.app/c/:splat          301
+/a/*          https://app.getreso.app/a/:splat          301
+/v/*          https://app.getreso.app/v/:splat          301
+/f/*          https://app.getreso.app/f/:splat          301
+/p/*          https://app.getreso.app/p/:splat          301
+/l/*          https://app.getreso.app/l/:splat          301
+/series/*     https://app.getreso.app/series/:splat     301
+/concerts     https://app.getreso.app/concerts/         301
+/concerts/*   https://app.getreso.app/concerts/:splat   301
+/artists      https://app.getreso.app/artists/          301
+/artists/*    https://app.getreso.app/artists/:splat    301
+/venues       https://app.getreso.app/venues/           301
+/venues/*     https://app.getreso.app/venues/:splat     301
+/festivals    https://app.getreso.app/festivals/        301
+/festivals/*  https://app.getreso.app/festivals/:splat  301
+/search       https://app.getreso.app/search/           301
+/search/*     https://app.getreso.app/search/:splat     301
+/sitemap.xml  https://app.getreso.app/sitemap.xml       301
+/sitemap-*    https://app.getreso.app/sitemap-:splat    301
